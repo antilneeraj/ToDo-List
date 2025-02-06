@@ -10,14 +10,16 @@ router.post("/", async (req, res) => {
 });
 
 // Get Tasks
-router.get("/", async (req, res) => {
+router.get("/", async (res) => {
   const tasks = await Task.find();
   res.json(tasks);
 });
 
 // Update Task
 router.put("/:id", async (req, res) => {
-  const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
   res.json(task);
 });
 

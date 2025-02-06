@@ -20,13 +20,23 @@ export default function TodoPage() {
     setTask("");
   };
 
+  const editTask = async (id, newTitle) => {
+    if (!newTitle) return;
+    const res = await axios.put(`http://localhost:5000/tasks/${id}`, {
+      title: newTitle,
+    });
+    setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
+  };
+
   const deleteTask = async (id) => {
     await axios.delete(`http://localhost:5000/tasks/${id}`);
     setTasks(tasks.filter((t) => t._id !== id));
   };
 
   const toggleCompletion = async (id, completed) => {
-    const res = await axios.put(`http://localhost:5000/tasks/${id}`, { completed: !completed });
+    const res = await axios.put(`http://localhost:5000/tasks/${id}`, {
+      completed: !completed,
+    });
     setTasks(tasks.map((t) => (t._id === id ? res.data : t)));
   };
 
@@ -49,7 +59,12 @@ export default function TodoPage() {
             Add Task
           </button>
         </div>
-        <TaskList tasks={tasks} toggleCompletion={toggleCompletion} deleteTask={deleteTask} />
+        <TaskList
+          tasks={tasks}
+          toggleCompletion={toggleCompletion}
+          deleteTask={deleteTask}
+          editTask={editTask}
+        />
       </div>
     </div>
   );
