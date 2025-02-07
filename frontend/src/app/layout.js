@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "To-Do App",
+  title: "To-Do App | Task 1",
   description: "A simple to-do list app built with Next.js",
 };
 

@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get Tasks
-router.get("/", async (res) => {
+router.get("/", async (_req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
 });
